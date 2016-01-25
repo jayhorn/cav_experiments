@@ -8,6 +8,16 @@ env:
 jdk:
   - oraclejdk8
 
+python:
+ - 2.7
+
+install:
+  - export LZ="$TRAVIS_BUILD_DIR/../jpf"
+  - mkdir -p $LZ
+  - wget --output-document=jpf.tar.gz https://www.dropbox.com/s/x8nx2kkm66qr5nh/jpf.tar.gz?dl=1;
+  - tar xvf jpf.tar.gz --strip-components=1 -C $LZ;
+  - ls $LZ
+
 before_install:
    - echo "Running the experiments."
    - pwd
@@ -15,7 +25,8 @@ before_install:
 
 script:   
    - ./run_jayhorn.sh
-   - ./run_jpf.sh
+   - ls $LZ
+   - python run_jpf.py -h
 
 after_success:
    - echo "All done."
