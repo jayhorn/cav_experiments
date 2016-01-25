@@ -1,0 +1,21 @@
+
+language: java
+
+env:
+  global:
+    - TMPDIR=/tmp
+
+jdk:
+  - oraclejdk8
+
+before_install:
+   - echo "Running the experiments."
+   - pwd
+   - export LD_LIBRARY_PATH=$(pwd)/jayhorn/native_lib
+
+script:   
+   - ./run_jayhorn.sh
+   - ./run_jpf.sh
+
+after_success:
+   - echo "All done."
