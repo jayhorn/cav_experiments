@@ -39,8 +39,10 @@ def runBench(args):
         jpf = glob.glob(os.path.abspath(d) + os.sep + "*.jpf")
         if len(jpf) == 1:
             cmd = ['java', "-jar", "./jpf/RunJPF.jar", "+shell.port=4242", jpf[0]]
+            print cmd
             p = subprocess.Popen(cmd, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             result, _ = p.communicate()
+            print result
             ans = processFile(bench, result)
             all_results.update(ans)
     print all_results
