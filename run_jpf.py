@@ -46,7 +46,11 @@ def runBench(args):
             p = subprocess.Popen(cmd, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             result, _ = p.communicate()
             ans = processFile(bench, result)
+            print "Benchmark: " + bench
+            print "Result:" + str(result)
+            print "---------------------"
             all_results.update(ans)
+    print "---- SUMMARY ----"
     print all_results
 
 
