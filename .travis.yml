@@ -22,7 +22,7 @@ install:
   - mkdir -p $JPF_CORE
   - tar xvf jpf-core.tar.gz --strip-components=1 -C $JPF_CORE;
   - mv .jpf $TRAVIS_BUILD_DIR
-  - cd 
+  - cd ../
   - pwd
   - ls
 
