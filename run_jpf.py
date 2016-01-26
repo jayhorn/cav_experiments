@@ -28,6 +28,10 @@ def processFile(bench, result):
     return {bench:stats}, stats
 
 
+config = """ target=Main
+ classpath=${jpf-core}/../../benchmarks/MinePump/spec1-5/%s
+"""
+
 def runBench(args):
     dr = args.directory
     viz_html = ""
