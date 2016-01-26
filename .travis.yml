@@ -33,6 +33,7 @@ before_install:
 
 script:   
    - ./run_jayhorn.sh
+   - python run_jpf.py ./benchmarks/cbmc-java
 
 after_success:
    - echo "All done."
