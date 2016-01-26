@@ -24,7 +24,7 @@ install:
   - mv .jpf $TRAVIS_BUILD_DIR
   - cd ../
   - pwd
-  - ls
+  - ls .jpf
 
 before_install:
    - echo "Running the experiments."
