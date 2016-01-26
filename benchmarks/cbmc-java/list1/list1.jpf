@@ -1,2 +1,4 @@
 target=list1
- classpath=/Users/teme/Documents/GitHub/jayhorn/jayhorn/build/resources/test/cbmc-java/list1/
+
+ classpath=${jpf-core}/../../benchmarks/cbmc-java/list1/
+

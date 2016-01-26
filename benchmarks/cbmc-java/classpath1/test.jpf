@@ -1,2 +1,4 @@
 target=test
- classpath=/Users/teme/Documents/GitHub/jayhorn/jayhorn/build/resources/test/cbmc-java/test/
+
+ classpath=${jpf-core}/../../benchmarks/cbmc-java/test/
+

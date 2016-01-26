@@ -1,2 +1,4 @@
 target=return1
- classpath=/Users/teme/Documents/GitHub/jayhorn/jayhorn/build/resources/test/cbmc-java/return1/
+
+ classpath=${jpf-core}/../../benchmarks/cbmc-java/return1/
+

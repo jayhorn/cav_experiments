@@ -38,10 +38,13 @@ def runBench(args):
         bench = tmp[len(tmp)-1]
         jpf = glob.glob(os.path.abspath(d) + os.sep + "*.jpf")
         if len(jpf) == 1:
+            # file = fileinput.FileInput(jpf[0], inplace=True, backup='.bak')
+            # for line in file:
+            #     print line.replace("/Users/teme/Documents/GitHub/jayhorn/jayhorn/build/resources/test/", "${jpf-core}/../../benchmarks/")
+            # file.close()
             cmd = ['java', "-jar", "./jpf-travis/jpf-core/build/RunJPF.jar", "+shell.port=4242", jpf[0]]
             p = subprocess.Popen(cmd, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             result, _ = p.communicate()
-            print result
             ans = processFile(bench, result)
             all_results.update(ans)
     print all_results
