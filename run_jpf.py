@@ -25,7 +25,7 @@ def processFile(bench, result):
             stats.update({"ins":str(ins)})
         if 'java.lang.AssertionError' in r:
             stats.update({"ans":"CEX"})
-    return {bench:stats}
+    return {bench:stats}, stats
 
 
 def runBench(args):
@@ -45,9 +45,9 @@ def runBench(args):
             cmd = ['java', "-jar", "./jpf-travis/jpf-core/build/RunJPF.jar", "+shell.port=4242", jpf[0]]
             p = subprocess.Popen(cmd, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             result, _ = p.communicate()
-            ans = processFile(bench, result)
+            ans, stats = processFile(bench, result)
             print "Benchmark: " + bench
-            print "Result:" + str(result)
+            print "Result:" + str(stats)
             print "---------------------"
             all_results.update(ans)
     print "---- SUMMARY ----"
