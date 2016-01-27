@@ -33,7 +33,10 @@ before_install:
 
 script:   
    - ./run_jayhorn.sh
+   - echo "    RUNNING  JPF on CBMC    " 
    - python run_jpf.py ./benchmarks/cbmc-java
+   - echo "    RUNNING  JPF on MinePUMP    " 
+   - python run_jpf.py ./benchmarks/MinePump/spec1-5
 
 after_success:
    - echo "All done."

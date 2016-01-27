@@ -54,8 +54,8 @@ def runBench(args):
             print "Result:" + str(stats)
             print "---------------------"
             all_results.update(ans)
-    print "---- SUMMARY ----"
-    print all_results
+    # print "---- SUMMARY ----"
+    # print all_results
 
 
 if __name__ == "__main__":
