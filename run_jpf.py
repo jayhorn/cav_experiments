@@ -38,7 +38,6 @@ JAYHORN = "./jayhorn/jayhorn/build/libs/jayhorn.jar"
 
 def runJar(jar):
     try:
-        print "Running " + jar
         p = subprocess.Popen(jar, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         result, _ = p.communicate()
         print result
