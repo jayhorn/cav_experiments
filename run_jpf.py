@@ -64,7 +64,7 @@ def runBench(args):
             cmd_jpf = ['java', "-jar", JPF, "+shell.port=4242", jpf[0]]
             cmd_jayhorn = ['java', "-jar", JAYHORN, "-solver", "z3",  "-j", d]
             jpf_result = runJar(JPF)
-            jayhorn_result = runJar(JAYHORN)
+            #jayhorn_result = runJar(JAYHORN)
             if jpf_result:
                 print "-------  JPF -------"
                 ans, stats = processFile(bench, jpf_result)
@@ -72,10 +72,10 @@ def runBench(args):
                 print "Result:" + str(stats)
                 print "---------------------"
                 all_results.update(ans)
-            if jayhorn_result:
-                print "-------  JPF -------"
-                print jayhorn_result
-                print "---------------------"
+            # if jayhorn_result:
+            #     print "-------  JPF -------"
+            #     print jayhorn_result
+            #     print "---------------------"
     # print "---- SUMMARY ----"
     # print all_results
 
