@@ -36,6 +36,7 @@ install:
   - ./gradlew jar
   - ls build/libs/
   - cd ../..
+  - java -jar jayhorn/jayhorn/build/libs/jayhorn.jar -h
 
 before_install:
    - echo "Running the experiments."
