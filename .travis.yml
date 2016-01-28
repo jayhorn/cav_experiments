@@ -27,6 +27,7 @@ install:
   - ls .jpf
   - echo "Installing JAYHORN"
   - git clone https://github.com/jayhorn/jayhorn
+  - ls
   - cd jayhorn
   - ls
   - git branch devel
