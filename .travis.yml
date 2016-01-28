@@ -30,7 +30,7 @@ install:
   - ls
   - cd jayhorn
   - ls
-  - git branch devel
+  - git checkout devel
   - cd jayhorn
   - ls
   - ./gradelw jar
