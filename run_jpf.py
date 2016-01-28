@@ -32,6 +32,9 @@ config = """ target=Main
  classpath=${jpf-core}/../../benchmarks/MinePump/spec1-5/%s
 """
 
+JPF = "./jpf-travis/jpf-core/build/RunJPF.jar"
+JAYHORN = "./jayhorn/jayhorn/build/libs/jayhorn.jar"
+
 def runBench(args):
     dr = args.directory
     viz_html = ""
@@ -46,9 +49,13 @@ def runBench(args):
             # for line in file:
             #     print line.replace("/Users/teme/Documents/GitHub/jayhorn/jayhorn/build/resources/test/", "${jpf-core}/../../benchmarks/")
             # file.close()
-            cmd = ['java', "-jar", "./jpf-travis/jpf-core/build/RunJPF.jar", "+shell.port=4242", jpf[0]]
-            p = subprocess.Popen(cmd, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            result, _ = p.communicate()
+            cmd_jpf = ['java', "-jar", JPF, "+shell.port=4242", jpf[0]]
+            cmd_jayhorn = ['java', "-jar", JAYHORN, "-solver", "z3",  "-j", d]
+            p_jpf = subprocess.Popen(cmd_jpf, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            p_jayhorn = subprocess.Popen(cmd_jpf, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            result_jpf, _ = p_jpf.communicate()
+            result_jayhorn, _ = p_jpf.communicate()
+            print result_jayhorn
             ans, stats = processFile(bench, result)
             print "Benchmark: " + bench
             print "Result:" + str(stats)
