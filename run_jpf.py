@@ -35,11 +35,13 @@ config = """ target=Main
 JPF = "./jpf-travis/jpf-core/build/RunJPF.jar"
 JAYHORN = "./jayhorn/jayhorn/build/libs/jayhorn.jar"
 
+
 def runJar(jar):
     try:
         print "Running " + jar
         p = subprocess.Popen(jar, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         result, _ = p.communicate()
+        print result
         return result
     except Exception as e:
         print str(e)
@@ -63,8 +65,8 @@ def runBench(args):
             # file.close()
             cmd_jpf = ['java', "-jar", JPF, "+shell.port=4242", jpf[0]]
             cmd_jayhorn = ['java', "-jar", JAYHORN, "-solver", "z3",  "-j", d]
-            jpf_result = runJar(JPF)
-            #jayhorn_result = runJar(JAYHORN)
+            jpf_result = runJar(cmd_jpf)
+            jayhorn_result = runJar(cmd_jayhorn)
             if jpf_result:
                 print "-------  JPF -------"
                 ans, stats = processFile(bench, jpf_result)
@@ -72,10 +74,10 @@ def runBench(args):
                 print "Result:" + str(stats)
                 print "---------------------"
                 all_results.update(ans)
-            # if jayhorn_result:
-            #     print "-------  JPF -------"
-            #     print jayhorn_result
-            #     print "---------------------"
+            if jayhorn_result:
+                print "-------  JPF -------"
+                print jayhorn_result
+                print "---------------------"
     # print "---- SUMMARY ----"
     # print all_results
 
