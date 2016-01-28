@@ -99,7 +99,7 @@ public class BellmanFord {
 
         final int D[][] = new int[V][V];
         Random randomGenerator = new Random();
-        
+
         for (int i = 0; i < V; i++) {
             for (int j = 0; j < V; j++) {
                 if (i ==j) continue;

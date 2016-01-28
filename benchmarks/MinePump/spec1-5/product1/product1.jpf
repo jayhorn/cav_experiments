@@ -1,2 +1,2 @@
  target=Main
- classpath=${jpf-core}/../../benchmarks/MinePump/spec1-5/product1
+ classpath=${jpf-core}/../cav_experiments/benchmarks/MinePump/spec1-5/product1

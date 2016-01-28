@@ -25,6 +25,15 @@ install:
   - cd ../
   - pwd
   - ls .jpf
+  - echo "Installing JAYHORN"
+  - git clone https://github.com/jayhorn/jayhorn
+  - cd jayhorn
+  - ls
+  - git branch devel
+  - cd jayhorn
+  - ls
+  - ./gradelw jar
+  - cd
 
 before_install:
    - echo "Running the experiments."
