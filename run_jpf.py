@@ -7,7 +7,7 @@ import glob
 import subprocess
 
 def processFile(bench, result, tool):
-    stats = {"tool": tool, "ans":"", "time":"", "mem":"", "ins":""}
+    stats = {"tool": tool, "ans":"", "time":"", "mem":"", "inst":""}
     if result is None:
         stats.update({"ans":"ERR"})
         return {bench:stats}, stats
@@ -26,7 +26,7 @@ def processFile(bench, result, tool):
             if 'instructions' in r:
                 t = r.split()
                 ins = t[len(t)-1]
-                stats.update({"ins":str(ins)})
+                stats.update({"inst":str(ins)})
             if 'java.lang.AssertionError' in r:
                 stats.update({"ans":"CEX"})
     elif tool == "JAYHORN":
@@ -80,7 +80,7 @@ def runBench(args):
             print "JPF stats:" + str(jpf_stats)
             print "JAYHORN stats:" + str(jayhorn_stats)
             print "---------------------"
-            all_results.update(ans)
+            #all_results.update(ans)
     # print "---- SUMMARY ----"
     # print all_results
 
