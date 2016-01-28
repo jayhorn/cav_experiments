@@ -72,7 +72,7 @@ def runBench(args):
             #     print line.replace("/Users/teme/Documents/GitHub/jayhorn/jayhorn/build/resources/test/", "${jpf-core}/../../benchmarks/")
             # file.close()
             cmd_jpf = ['java', "-jar", JPF, "+shell.port=4242", jpf[0]]
-            cmd_jayhorn = ['java', "-jar", JAYHORN, "-solver", "z3",  "-j", d]
+            cmd_jayhorn = ['java', "-jar", JAYHORN, "-solver", "z3",  "-t", "60", "-j", d]
             jpf_result = runJar(cmd_jpf)
             jayhorn_result = runJar(cmd_jayhorn)
             jpf_ans, jpf_stats = processFile(bench, jpf_result, "JPF")
