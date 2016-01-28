@@ -65,7 +65,12 @@ def runBench(args):
         tmp = d.split("/")
         bench = tmp[len(tmp)-1]
         jpf = glob.glob(os.path.abspath(d) + os.sep + "*.jpf")
-        cmd_jayhorn = ['java', "-jar", JAYHORN, "-solver", "z3",  "-t", "60", "-j", d]
+        cmd_z3 = ['java', "-jar", JAYHORN, "-solver", "z3",  "-t", "60", "-j", d]
+        cmd_eldarica = ['java', "-jar", JAYHORN, "-solver", "-j", d]
+        z3_result = runJar(cmd_z3)
+        z3_ans, z3_stats = processFile(bench, z3_result, "JAYHORN")
+        eldarica_result = runJar(cmd_eldarica)
+        eldarica_ans, eldarica_stats = processFile(bench, eldarica_result, "JAYHORN")
         if len(jpf) == 1:
             # file = fileinput.FileInput(jpf[0], inplace=True, backup='.bak')
             # for line in file:
@@ -73,18 +78,15 @@ def runBench(args):
             # file.close()
             cmd_jpf = ['java', "-jar", JPF, "+shell.port=4242", jpf[0]]
             jpf_result = runJar(cmd_jpf)
-            jayhorn_result = runJar(cmd_jayhorn)
             jpf_ans, jpf_stats = processFile(bench, jpf_result, "JPF")
-            jayhorn_ans, jayhorn_stats = processFile(bench, jayhorn_result, "JAYHORN")
             print "JPF RESULT:\t" + str(jpf_stats)
             print "JAYHORN RESULT:\t" + str(jayhorn_stats)
-            print "---------------------"
         else:
-            jayhorn_result = runJar(cmd_jayhorn)
-            jayhorn_ans, jayhorn_stats = processFile(bench, jayhorn_result, "JAYHORN")
             print "JPF RESULT:\t" + "NO JPF CONFIG"
-            print "JAYHORN RESULT:\t" + str(jayhorn_stats)
-            print "---------------------"
+        print "JAYHORN (ELDARICA) RESULT:\t" + str(eldarica_stats)
+        print "JAYHORN (Z3) RESULT:\t" + str(z3_stats)
+
+        print "---------------------"
 
             #all_results.update(ans)
     # print "---- SUMMARY ----"
