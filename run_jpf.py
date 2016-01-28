@@ -41,6 +41,7 @@ def runBench(args):
     all_dir = [os.path.join(dr, name)for name in os.listdir(dr) if os.path.isdir(os.path.join(dr, name)) ]
     all_results = {}
     for d in all_dir:
+        print d
         tmp = d.split("/")
         bench = tmp[len(tmp)-1]
         jpf = glob.glob(os.path.abspath(d) + os.sep + "*.jpf")
@@ -51,6 +52,7 @@ def runBench(args):
             # file.close()
             cmd_jpf = ['java', "-jar", JPF, "+shell.port=4242", jpf[0]]
             cmd_jayhorn = ['java', "-jar", JAYHORN, "-solver", "z3",  "-j", d]
+            print cmd_jayhorn
             p_jpf = subprocess.Popen(cmd_jpf, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             p_jayhorn = subprocess.Popen(cmd_jpf, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             result_jpf, _ = p_jpf.communicate()
