@@ -30,9 +30,7 @@ def processFile(bench, result, tool):
                 stats.update({"inst":str(ins)})
             if 'java.lang.AssertionError' in r:
                 stats.update({"ans":"CEX"})
-
     elif tool == "JAYHORN":
-        print result
         if "checker says true" in result:
             stats.update({"ans":"SAFE"})
         if "checker says false" in result:
