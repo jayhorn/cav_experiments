@@ -8,6 +8,7 @@ import subprocess
 
 def processFile(bench, result, tool):
     stats = {"tool": tool, "ans":"", "time":"", "mem":"", "inst":""}
+    print tool
     if result is None:
         stats.update({"ans":"ERR"})
         return {bench:stats}, stats
@@ -29,7 +30,9 @@ def processFile(bench, result, tool):
                 stats.update({"inst":str(ins)})
             if 'java.lang.AssertionError' in r:
                 stats.update({"ans":"CEX"})
+
     elif tool == "JAYHORN":
+        print result
         if "checker says true" in result:
             stats.update({"ans":"SAFE"})
         if "checker says false" in result:
@@ -61,7 +64,7 @@ def runBench(args):
     all_dir = [os.path.join(dr, name)for name in os.listdir(dr) if os.path.isdir(os.path.join(dr, name)) ]
     all_results = {}
     for d in all_dir:
-        print d
+        print "Benchmark:\t " + str(d)
         tmp = d.split("/")
         bench = tmp[len(tmp)-1]
         jpf = glob.glob(os.path.abspath(d) + os.sep + "*.jpf")
@@ -75,10 +78,9 @@ def runBench(args):
             jpf_result = runJar(cmd_jpf)
             jayhorn_result = runJar(cmd_jayhorn)
             jpf_ans, jpf_stats = processFile(bench, jpf_result, "JPF")
-            jayhorn_ans, jayhorn_stats = processFile(bench, jpf_result, "JAYHORN")
-            print "Benchmark: " + bench
-            print "JPF stats:" + str(jpf_stats)
-            print "JAYHORN stats:" + str(jayhorn_stats)
+            jayhorn_ans, jayhorn_stats = processFile(bench, jayhorn_result, "JAYHORN")
+            print "JPF RESULT:\t" + str(jpf_stats)
+            print "JAYHORN RESULT:\t" + str(jayhorn_stats)
             print "---------------------"
             #all_results.update(ans)
     # print "---- SUMMARY ----"
