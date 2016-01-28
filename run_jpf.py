@@ -8,7 +8,6 @@ import subprocess
 
 def processFile(bench, result, tool):
     stats = {"tool": tool, "ans":"", "time":"", "mem":"", "inst":""}
-    print tool
     if result is None:
         stats.update({"ans":"ERR"})
         return {bench:stats}, stats
@@ -66,13 +65,13 @@ def runBench(args):
         tmp = d.split("/")
         bench = tmp[len(tmp)-1]
         jpf = glob.glob(os.path.abspath(d) + os.sep + "*.jpf")
+        cmd_jayhorn = ['java', "-jar", JAYHORN, "-solver", "z3",  "-t", "60", "-j", d]
         if len(jpf) == 1:
             # file = fileinput.FileInput(jpf[0], inplace=True, backup='.bak')
             # for line in file:
             #     print line.replace("/Users/teme/Documents/GitHub/jayhorn/jayhorn/build/resources/test/", "${jpf-core}/../../benchmarks/")
             # file.close()
             cmd_jpf = ['java', "-jar", JPF, "+shell.port=4242", jpf[0]]
-            cmd_jayhorn = ['java', "-jar", JAYHORN, "-solver", "z3",  "-t", "60", "-j", d]
             jpf_result = runJar(cmd_jpf)
             jayhorn_result = runJar(cmd_jayhorn)
             jpf_ans, jpf_stats = processFile(bench, jpf_result, "JPF")
@@ -80,6 +79,13 @@ def runBench(args):
             print "JPF RESULT:\t" + str(jpf_stats)
             print "JAYHORN RESULT:\t" + str(jayhorn_stats)
             print "---------------------"
+        else:
+            jayhorn_result = runJar(cmd_jayhorn)
+            jayhorn_ans, jayhorn_stats = processFile(bench, jayhorn_result, "JAYHORN")
+            print "JPF RESULT:\t" + "NO JPF CONFIG"
+            print "JAYHORN RESULT:\t" + str(jayhorn_stats)
+            print "---------------------"
+
             #all_results.update(ans)
     # print "---- SUMMARY ----"
     # print all_results
