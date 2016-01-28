@@ -33,8 +33,8 @@ install:
   - git checkout devel
   - cd jayhorn
   - ls
-  - ./gradelw jar
-  - cd
+  - ./gradlew jar
+  - cd ../..
 
 before_install:
    - echo "Running the experiments."
