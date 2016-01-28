@@ -6,25 +6,35 @@ import os
 import glob
 import subprocess
 
-def processFile(bench, result):
-    stats = {"ans":"", "time":"", "mem":"", "ins":""}
-    for r in result.splitlines():
-        if 'no errors detected' in r:
-            stats.update({"ans":"SAFE"})
-        if 'elapsed time' in r:
-            t = r.split()
-            time = t[len(t)-1]
-            stats.update({"time":str(time)})
-        if 'max memory' in r:
-            t = r.split()
-            mem = t[len(t)-1]
-            stats.update({"mem":str(mem)})
-        if 'instructions' in r:
-            t = r.split()
-            ins = t[len(t)-1]
-            stats.update({"ins":str(ins)})
-        if 'java.lang.AssertionError' in r:
-            stats.update({"ans":"CEX"})
+def processFile(bench, result, tool):
+    stats = {"tool": tool, "ans":"", "time":"", "mem":"", "ins":""}
+    if result is None:
+        stats.update({"ans":"ERR"})
+        return {bench:stats}, stats
+    if tool == "JPF":
+        for r in result.splitlines():
+            if 'no errors detected' in r:
+                stats.update({"ans":"SAFE"})
+            if 'elapsed time' in r:
+                t = r.split()
+                time = t[len(t)-1]
+                stats.update({"time":str(time)})
+            if 'max memory' in r:
+                t = r.split()
+                mem = t[len(t)-1]
+                stats.update({"mem":str(mem)})
+            if 'instructions' in r:
+                t = r.split()
+                ins = t[len(t)-1]
+                stats.update({"ins":str(ins)})
+            if 'java.lang.AssertionError' in r:
+                stats.update({"ans":"CEX"})
+    elif tool == "JAYHORN":
+        for r in result.splitlines():
+            if "checker says true" in r:
+                stats.update({"ans":"SAFE"})
+            if "checker says true" in r:
+                stats.update({"ans":"CEX"})
     return {bench:stats}, stats
 
 
@@ -66,17 +76,13 @@ def runBench(args):
             cmd_jayhorn = ['java', "-jar", JAYHORN, "-solver", "z3",  "-j", d]
             jpf_result = runJar(cmd_jpf)
             jayhorn_result = runJar(cmd_jayhorn)
-            if jpf_result:
-                print "-------  JPF -------"
-                ans, stats = processFile(bench, jpf_result)
-                print "Benchmark: " + bench
-                print "Result:" + str(stats)
-                print "---------------------"
-                all_results.update(ans)
-            if jayhorn_result:
-                print "-------  JPF -------"
-                print jayhorn_result
-                print "---------------------"
+            jpf_ans, jpf_stats = processFile(bench, jpf_result, "JPF")
+            jayhorn_ans, jayhorn_stats = processFile(bench, jpf_result, "JAYHORN")
+            print "Benchmark: " + bench
+            print "JPF stats:" + str(jpf_stats)
+            print "JAYHORN stats:" + str(jayhorn_stats)
+            print "---------------------"
+            all_results.update(ans)
     # print "---- SUMMARY ----"
     # print all_results
 
