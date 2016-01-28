@@ -30,11 +30,10 @@ def processFile(bench, result, tool):
             if 'java.lang.AssertionError' in r:
                 stats.update({"ans":"CEX"})
     elif tool == "JAYHORN":
-        for r in result.splitlines():
-            if "checker says true" in r:
-                stats.update({"ans":"SAFE"})
-            if "checker says true" in r:
-                stats.update({"ans":"CEX"})
+        if "checker says true" in result:
+            stats.update({"ans":"SAFE"})
+        if "checker says false" in result:
+            stats.update({"ans":"CEX"})
     return {bench:stats}, stats
 
 
@@ -50,7 +49,6 @@ def runJar(jar):
     try:
         p = subprocess.Popen(jar, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         result, _ = p.communicate()
-        print result
         return result
     except Exception as e:
         print str(e)
