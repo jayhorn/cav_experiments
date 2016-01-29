@@ -45,9 +45,9 @@ before_install:
 
 script:   
    - echo "    RUNNING  CBMC    " 
-   - python run_jpf.py ./benchmarks/cbmc-java
+   - python runner.py ./benchmarks/cbmc-java
    - echo "    RUNNING  MinePUMP    " 
-   - python run_jpf.py ./benchmarks/MinePump/spec1-5
+   - python runner.py ./benchmarks/MinePump/spec1-5
 
 after_success:
    - echo "All done."
