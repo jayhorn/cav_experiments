@@ -80,7 +80,8 @@ def runBench(args):
             jpf_result = runJar(cmd_jpf)
             jpf_ans, jpf_stats = processFile(bench, jpf_result, "JPF")
             print "JPF RESULT:\t" + str(jpf_stats)
-            print "JAYHORN RESULT:\t" + str(jayhorn_stats)
+            print "JAYHORN (ELDARICA) RESULT:\t" + str(eldarica_stats)
+            print "JAYHORN (Z3) RESULT:\t" + str(z3_stats)
         else:
             print "JPF RESULT:\t" + "NO JPF CONFIG"
         print "JAYHORN (ELDARICA) RESULT:\t" + str(eldarica_stats)
