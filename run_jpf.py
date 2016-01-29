@@ -66,7 +66,7 @@ def runBench(args):
         bench = tmp[len(tmp)-1]
         jpf = glob.glob(os.path.abspath(d) + os.sep + "*.jpf")
         cmd_z3 = ['java', "-jar", JAYHORN, "-solver", "z3",  "-t", "60", "-j", d]
-        cmd_eldarica = ['java', "-jar", JAYHORN, "-solver", "-j", d]
+        cmd_eldarica = ['java', "-jar", JAYHORN, "-j", d]
         z3_result = runJar(cmd_z3)
         z3_ans, z3_stats = processFile(bench, z3_result, "JAYHORN")
         eldarica_result = runJar(cmd_eldarica)
@@ -80,8 +80,6 @@ def runBench(args):
             jpf_result = runJar(cmd_jpf)
             jpf_ans, jpf_stats = processFile(bench, jpf_result, "JPF")
             print "JPF RESULT:\t" + str(jpf_stats)
-            print "JAYHORN (ELDARICA) RESULT:\t" + str(eldarica_stats)
-            print "JAYHORN (Z3) RESULT:\t" + str(z3_stats)
         else:
             print "JPF RESULT:\t" + "NO JPF CONFIG"
         print "JAYHORN (ELDARICA) RESULT:\t" + str(eldarica_stats)
