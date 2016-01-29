@@ -50,6 +50,8 @@ config = """ target=Main
 
 JPF = "./jpf-travis/jpf-core/build/RunJPF.jar"
 
+#JPF = "./jpf/RunJPF.jar"
+
 JAYHORN = "./jayhorn/jayhorn/build/libs/jayhorn.jar"
 
 
@@ -124,10 +126,10 @@ def runBench(args):
         jpf = glob.glob(os.path.abspath(d) + os.sep + "*.jpf")
         cmd_z3 = ['java', "-jar", JAYHORN, "-solver", "z3",  "-t", "20", "-j", d]
         cmd_eldarica = ['java', "-jar", JAYHORN, "-t", "20", "-j", d]
-        z3_result = runJar(cmd_z3)
-        z3_ans, z3_stats = processFile(bench, z3_result, "Z3")
-        eldarica_result = runJar(cmd_eldarica)
-        eldarica_ans, eldarica_stats = processFile(bench, eldarica_result, "ELD")
+        #z3_result = runJar(cmd_z3)
+        #z3_ans, z3_stats = processFile(bench, z3_result, "Z3")
+        #eldarica_result = runJar(cmd_eldarica)
+        #eldarica_ans, eldarica_stats = processFile(bench, eldarica_result, "ELD")
         if len(jpf) == 1:
             # file = fileinput.FileInput(jpf[0], inplace=True, backup='.bak')
             # for line in file:
@@ -139,8 +141,8 @@ def runBench(args):
             print "JPF RESULT:\t" + str(jpf_stats)
         else:
             print "JPF RESULT:\t" + "NO JPF CONFIG"
-        print "JAYHORN (ELDARICA) RESULT:\t" + str(eldarica_stats)
-        print "JAYHORN (Z3) RESULT:\t" + str(z3_stats)
+        #print "JAYHORN (ELDARICA) RESULT:\t" + str(eldarica_stats)
+        #print "JAYHORN (Z3) RESULT:\t" + str(z3_stats)
         #stats.brunch_print()
 
         print "---------------------"
