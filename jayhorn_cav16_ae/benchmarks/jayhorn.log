@@ -1,0 +1,6 @@
+2016-05-17 09:58:56,460 INFO (main) [root] - Starting verification for 1 entry points.
+2016-05-17 09:58:56,694 INFO (main) [root] - Building type hierarchy
+2016-05-17 09:58:56,694 INFO (main) [root] - Generating method contracts
+2016-05-17 09:58:56,714 INFO (main) [root] - Encoding methods as Horn clauses
+2016-05-17 09:58:56,891 INFO (main) [root] - 	Verification from entry <farith1: void main(java.lang.String[])>
+2016-05-17 09:58:58,983 INFO (main) [root] - 	Result:  Unsat

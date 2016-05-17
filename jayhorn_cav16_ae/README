@@ -1,0 +1,108 @@
+****************************************************************************
+*                                                                          *
+*          JayHorn: A Framework for verifying Java Programs                *
+*                                                                          *
+****************************************************************************
+
+Contents
+============================================================================
+1. Overview
+2. Installation
+3. Usage
+
+
+1. Overview
+============================================================================
+
+JayHorn is a verification based on Horn clauses for Java Programs. 
+For the artifact evaluation we are only supplying the Jar file. 
+The interested user can build JayHorn from sources (see Installation section). 
+
+JayHorn supports two solver backends: 
+- Eldarica (https://github.com/uuverifiers/eldarica) which is included and runs
+as a default.
+- Z3 (https://github.com/Z3Prover/z3) which can be used via a flag but requires 
+a bit of installation effort to get the JNI bindings running (see 2.3).
+
+
+2. Installation
+============================================================================
+
+2.1 Prerequisites
+---------------------
+You can skip this section if you are using the VM image.
+
+- Java 8:
+    JayHorn is a tool written in Java. The demo requires a Java 8 Runtime
+    Environment (JRE) to run, e.g., Oracle's (http://java.oracle.com/) or
+    OpenJDK (http://openjdk.java.net/).
+
+- (optional) Z3: If you want to use Z3 as the backend solver, you need the Z3 library.
+  The Z3 native library are supplied with this artifact (e.g. native_lib).
+
+
+2.2 Contents Overview
+---------------------
+This distribution contains the following files and directories:
+
+- benchmarks/
+    A set of Java programs
+
+- jayhorn.jar
+    The jayhorn jar file.
+
+- native_lib/
+  The Z3 native libraries.
+   
+- cav16-jayhorn.pdf
+  The accepted CAV paper
+
+- README
+    This file.
+
+
+2.3 Compiling from Source
+-------------------------
+This section is for interested readers only. It assumes that you have Gradle
+and git (http://git-scm.com/) installed, and are using a Unix-like operating
+system.
+
+For compiling the complete project from source, follow
+the following steps:
+
+   git clone https://github.com/jayhorn/jayhorn
+   cd jayhorn/jayhorn
+   ./gradlew jar
+   
+The jayhorn jar file will be generated in build/libs. Note that in order to use Z3,
+you need to do the following:
+
+ - in Linux
+    export LD_LIBRARY_PATH=[JAYHORN_DIR]/jayhorn/native_lib
+
+ - in OS X
+    export DYLD_LIBRARY_PATH=[JAYHORN_DIR]/jayhorn/native_lib
+
+
+2. Usage
+============================================================================
+ 
+  > java -jar jayhorn.jar [options] -j [JAR or Dir containing *.class]
+
+  options:
+
+     -solver [z3] // use Z3 instead of Eldarica (default solver)
+  
+
+ * Example
+
+  To verify the program in benchmarks/assert1/assert1.java
+
+  > java -jar jayhorn.jar -j benchmarks/assert1/
+
+  To verify the same program using Z3. 
+
+  > java -jar jayhorn.jar —solver z3 j benchmarks/assert1/ 
+    
+
+
