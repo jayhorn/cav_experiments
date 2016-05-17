@@ -8,7 +8,8 @@ Contents
 ============================================================================
 1. Overview
 2. Installation
-3. Usage
+3. Reproduce Exeperiments
+4. General Usage
 
 
 1. Overview
@@ -95,8 +96,20 @@ you need to do the following:
  - in OS X
     export DYLD_LIBRARY_PATH=[JAYHORN_DIR]/jayhorn/native_lib
 
+3. Usage
+============================================================================
+ To reproduce the experiments from Table 1 just run the following script.
 
-2. Usage
+ > ./table1.sh
+
+  and
+
+ > ./table1_z3.sh
+
+  to run jayhorn with Z3.
+
+
+4. Usage
 ============================================================================
  
   > java -jar jayhorn.jar [options] -j [JAR or Dir containing *.class]

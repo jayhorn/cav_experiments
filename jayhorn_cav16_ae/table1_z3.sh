@@ -5,7 +5,7 @@ export DYLD_LIBRARY_PATH=$(pwd)/native_lib
 
 cd benchmarks/cbmc
 
-echo "Running the CBMC benchmarks"
+echo "Running the CBMC benchmarks with Z3"
 for file in */ ; do
   if [[ -d "$file" && ! -L "$file" ]]; then
     echo "Running CBMC benchmark $file";
@@ -15,7 +15,7 @@ done
 
 
 cd ../svcomp_rec
-echo "Running the SVCOMP benchmarks"
+echo "Running the SVCOMP benchmarks with Z3"
 for file in */ ; do
     if [[ -d "$file" && ! -L "$file" ]]; then
         echo "Running SVCOMP benchmark $file";
@@ -24,7 +24,7 @@ for file in */ ; do
 done
 
 cd ../MinePump/spec1-5/
-echo "Running the MinePump benchmarks"
+echo "Running the MinePump benchmarks with Z3"
 for file in */ ; do
     if [[ -d "$file" && ! -L "$file" ]]; then
         echo "Running MinePump benchmark $file";
