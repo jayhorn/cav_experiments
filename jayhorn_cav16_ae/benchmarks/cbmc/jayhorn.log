@@ -1,0 +1,3 @@
+2016-05-17 11:47:56,521 INFO (main) [root] - Starting verification for 1 entry points.
+2016-05-17 11:47:56,544 ERROR (main) [root] - Cannot start z3. java.lang.UnsatisfiedLinkError: no libz3java in java.library.path
+2016-05-17 11:47:56,544 ERROR (main) [root] - java.lang.NullPointerException

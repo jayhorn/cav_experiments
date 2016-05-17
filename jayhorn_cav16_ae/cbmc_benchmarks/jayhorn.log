@@ -1,0 +1,5 @@
+2016-05-17 09:23:29,874 INFO (main) [root] - Starting verification for 1 entry points.
+2016-05-17 09:23:30,166 INFO (main) [root] - Building type hierarchy
+2016-05-17 09:23:30,166 INFO (main) [root] - Generating method contracts
+2016-05-17 09:23:30,212 INFO (main) [root] - Encoding methods as Horn clauses
+2016-05-17 09:23:30,524 INFO (main) [root] - 	Verification from entry <list1: void main(java.lang.String[])>
