@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export LD_LIBRARY_PATH=./native_lib
-export DYLD_LIBRARY_PATH=./native_lib
+export LD_LIBRARY_PATH=$(pwd)/native_lib
+export DYLD_LIBRARY_PATH=$(pwd)/native_lib
 
 cd benchmarks/cbmc
 
